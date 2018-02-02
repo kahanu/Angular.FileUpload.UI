@@ -1,12 +1,17 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { throwIfAlreadyLoaded } from './guards/module-import.guard';
+import { commonformgroups, services } from './core-declarations.lib';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: []
+  declarations: [],
+  providers: [
+    ...commonformgroups,
+    ...services
+  ]
 })
 export class CoreModule {
   constructor(

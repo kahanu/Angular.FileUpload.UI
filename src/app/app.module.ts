@@ -10,6 +10,8 @@ import { HttpRequestInterceptorService } from './core/interceptors/http-request-
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
+import { LayoutModule } from './shared/layout/layout.module';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -20,13 +22,15 @@ import { HomeModule } from './home/home.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    LayoutModule,
     CoreModule,
     SharedModule,
     HomeModule,
+    ToastrModule.forRoot(),
     AppRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptorService, multi: true }
+    // { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
