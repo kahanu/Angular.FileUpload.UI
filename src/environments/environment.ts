@@ -7,6 +7,7 @@ export const environment = {
   production: false,
   /** This pattern is useful for microservices. */
   Api: {
-    Upload: 'http://localhost:53830/api/upload'
+    Upload: 'http://localhost:53830/api/upload',
+    Products: 'http://localhost:53830/api/product'
   }
 };

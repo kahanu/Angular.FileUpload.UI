@@ -9,7 +9,7 @@ export class Entity {
 
 export class ResponseBase {
   success: boolean;
-  failureInformation: string;
+  errorMessage: string;
   data: {} | any[];
 }
 

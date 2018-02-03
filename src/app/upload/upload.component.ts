@@ -33,7 +33,6 @@ export class UploadComponent implements OnInit {
   }
 
   uploadFiles(e: any) {
-    // this.avatar = e.target.files[0];
     if (e.target.files.length > 0) {
       const file = e.target.files[0];
       this.uploadForm.get('avatar').setValue(file);
@@ -49,15 +48,12 @@ export class UploadComponent implements OnInit {
 
     this.uploadService.upload(formData).subscribe(
       res => {
-        if (res.Success) {
-          console.log('res: ', res);
-          this.formResponse = res['FormValues'];
+        if (res.success) {
+          this.formResponse = res['formValues'];
           this.toastr.success('Upload Success!', 'Upload');
         }
       },
-      error => {
-        console.log('error: ', JSON.stringify(error));
-      }
+      error => this.toastr.error(error, 'Upload Error')
     );
   }
 }

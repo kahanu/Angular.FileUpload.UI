@@ -14,8 +14,15 @@ export class UploadService extends HttpBase<any> {
     super(http, exceptionService, environment.Api.Upload);
   }
 
-  upload(data: any, path: string = '') {
-    const Url = this.url.concat(path);
+  /**
+   * The custom method for the Upload form.  This needs to be handled differently
+   * from the standard CRUD operations of the HttpBase class, because the payload
+   * should not be stringified.  Also Http parameters should be set here for the
+   * interceptor.
+   * @param data The form-data
+   */
+  upload(data: any) {
+    const Url = this.url;
 
     /**
      * You can't JSON stringify the data for form-data requests.

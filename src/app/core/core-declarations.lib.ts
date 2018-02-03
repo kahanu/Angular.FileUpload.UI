@@ -1,5 +1,5 @@
 import { CommonFormGroups } from '../shared/formgroups/common';
-import { UploadService, ExceptionService } from './services/index';
+import { UploadService, ExceptionService, ProductService } from './services/index';
 
 
 export const commonformgroups = [
@@ -8,5 +8,6 @@ export const commonformgroups = [
 
 export const services = [
   ExceptionService,
-  UploadService
+  UploadService,
+  ProductService
 ];
