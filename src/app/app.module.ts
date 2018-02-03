@@ -12,6 +12,7 @@ import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { LayoutModule } from './shared/layout/layout.module';
 import { ToastrModule } from 'ngx-toastr';
+import { UploadInterceptorService } from './core/interceptors/upload-interceptor.service';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule
   ],
   providers: [
-    // { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: UploadInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

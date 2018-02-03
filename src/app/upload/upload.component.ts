@@ -15,6 +15,7 @@ export class UploadComponent implements OnInit {
   person: Person;
   uploadForm: FormGroup;
   avatar: File;
+  formResponse: any;
 
   constructor(
     private fb: FormBuilder,
@@ -46,11 +47,17 @@ export class UploadComponent implements OnInit {
     formData.append('age', this.uploadForm.get('age').value);
     formData.append('avatar', this.uploadForm.get('avatar').value);
 
-    this.uploadService.save(formData, '').subscribe(res => {
-      // if (res.Success) {
-      console.log('res: ', res);
-      // }
-      this.toastr.success('Upload Success!', 'Upload');
-    }, error => this.toastr.error(error, 'Upload Error'));
+    this.uploadService.upload(formData).subscribe(
+      res => {
+        if (res.Success) {
+          console.log('res: ', res);
+          this.formResponse = res['FormValues'];
+          this.toastr.success('Upload Success!', 'Upload');
+        }
+      },
+      error => {
+        console.log('error: ', JSON.stringify(error));
+      }
+    );
   }
 }

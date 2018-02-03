@@ -28,6 +28,14 @@
           </div>
         </div>
       </form>
+      <div *ngIf="formResponse">
+        <strong>Response</strong>
+        <ul>
+            <li><b>Name: </b> <span>{{ formResponse.name }}</span></li>
+            <li><b>Age: </b> <span>{{ formResponse.age }}</span></li>
+            <li><b>File Name: </b> <span>{{ formResponse.avatar }}</span></li>
+          </ul>
+      </div>
     </div>
   </div>
 </div>
