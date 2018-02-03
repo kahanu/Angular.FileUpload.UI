@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../shared/models/product';
+import { Product } from '../shared/models/entities/product';
 import { ProductService } from '../core/services/index';
 import { ToastrService } from 'ngx-toastr';
 

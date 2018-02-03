@@ -1,4 +1,4 @@
-import { Entity } from './base';
+import { Entity } from '../base';
 
 
 export class Person extends Entity {

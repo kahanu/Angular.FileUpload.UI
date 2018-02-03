@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Person } from '../shared/models/person';
+import { Person } from '../shared/models/entities/person';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CommonFormGroups } from '../shared/formgroups/common';
 import { Helpers } from '../shared/helpers/helpers';

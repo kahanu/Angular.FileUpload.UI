@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-md-6">
+    <h3>Save Company</h3>
+    <p>Upload a file to a WebApi service and get back a response.</p>
+    <div>
+      <form class="form-horizontal" [formGroup]="companyForm">
+        <div class="form-group">
+          <label class="control-label col-md-3">Company Name:</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" formControlName="companyName" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3">City:</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" formControlName="city" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3">State:</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" formControlName="state" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3">Postal Code:</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" formControlName="postalCode" required>
+          </div>
+        </div>
+        <!-- <div class="form-group">
+          <label class="control-label col-md-3">Avatar:</label>
+          <div class="col-md-9">
+            <input type="file" class="form-control" (change)="uploadFiles($event)">
+          </div>
+        </div> -->
+        <div class="form-group">
+          <div class="col-md-offset-3 col-md-9">
+            <button type="button" class="btn btn-primary" [disabled]="!companyForm.valid" (click)="save()">Save</button>
+          </div>
+        </div>
+      </form>
+      <div *ngIf="formResponse">
+        <strong>Response</strong>
+        <ul>
+          <li>
+            <b>Company Name: </b>
+            <span>{{ formResponse.company.companyName }}</span>
+          </li>
+          <li>
+            <b>Location: </b>
+            <span>{{ formResponse.company.city }} {{ formResponse.company.state }} {{ formResponse.company.postalCode }}</span>
+          </li>
+          <li>
+            <b>Files: </b>
+            <span *ngFor="let file of formResponse.files">
+              {{ file.fileName }} - {{ file.fileSize }} - {{ file.contentType}}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="well well-sm">
+      <p>The reason this works has three parts to it:</p>
+      <ol>
+        <li>
+          <b>Interceptor</b> - the UploadInterceptor service removes the "Content-Type" header from the request for multipart/form-data
+          submissions. A requirement to make this work. This interceptor comes after the HttpRequestInterceptor in the app.module.ts.
+          The order of the interceptors is important!</li>
+        <li>
+          <b>No stringification</b> - the data being passed to the HttpClient "post" method should NOT be JSON.stringified().</li>
+        <li>
+          <b>Http Parameter</b> - an HttpParameter is created and sent along with the form "post" request with the key of "upload".
+          When the UploadInterceptor intercepts Http requests, it checks to see if this request is an upload request, meaning
+          it will be posting multipart/form-data. If it is, then it removes the "Content-Type" header from the request, which
+          makes this work.</li>
+      </ol>
+    </div>
+  </div>
+</div>

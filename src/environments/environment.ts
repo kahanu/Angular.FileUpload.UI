@@ -8,6 +8,7 @@ export const environment = {
   /** This pattern is useful for microservices. */
   Api: {
     Upload: 'http://localhost:53830/api/upload',
-    Products: 'http://localhost:53830/api/product'
+    Products: 'http://localhost:53830/api/product',
+    Company: 'http://localhost:53830/api/company'
   }
 };

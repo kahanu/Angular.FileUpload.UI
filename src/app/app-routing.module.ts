@@ -10,7 +10,8 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       { path: 'upload', loadChildren: 'app/upload/upload.module#UploadModule' },
-      { path: 'products', loadChildren: 'app/product/product.module#ProductModule' }
+      { path: 'products', loadChildren: 'app/product/product.module#ProductModule' },
+      { path: 'companies', loadChildren: 'app/company/company.module#CompanyModule' }
     ]
   }
 ];
