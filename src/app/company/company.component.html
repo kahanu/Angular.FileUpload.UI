@@ -28,12 +28,12 @@
             <input type="text" class="form-control" formControlName="postalCode" required>
           </div>
         </div>
-        <!-- <div class="form-group">
+        <div class="form-group">
           <label class="control-label col-md-3">Avatar:</label>
           <div class="col-md-9">
             <input type="file" class="form-control" (change)="uploadFiles($event)">
           </div>
-        </div> -->
+        </div>
         <div class="form-group">
           <div class="col-md-offset-3 col-md-9">
             <button type="button" class="btn btn-primary" [disabled]="!companyForm.valid" (click)="save()">Save</button>
@@ -43,6 +43,9 @@
       <div *ngIf="formResponse">
         <strong>Response</strong>
         <ul>
+          <li><b>Id: </b>
+          <span>{{ formResponse.company.id }}</span>
+          </li>
           <li>
             <b>Company Name: </b>
             <span>{{ formResponse.company.companyName }}</span>

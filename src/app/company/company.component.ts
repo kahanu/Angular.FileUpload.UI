@@ -29,6 +29,13 @@ export class CompanyComponent implements OnInit {
     this.companyForm = this.commonFormGroups.initCompany(this.company);
   }
 
+  uploadFiles(e: any) {
+    if (e.target.files.length > 0) {
+      const file = e.target.files[0];
+      // this.companyForm.get('avatar').setValue(file);
+    }
+  }
+
   save() {
     const form = this.companyForm.value;
 
