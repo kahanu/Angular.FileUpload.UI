@@ -2,25 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { Person } from '../shared/models/entities/person';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CommonFormGroups } from '../shared/formgroups/common';
-import { Helpers } from '../shared/helpers/helpers';
-import { UploadService } from '../core/services/upload.service';
 import { ToastrService } from 'ngx-toastr';
+import { PersonService } from '../core/services/index';
 
 @Component({
-  selector: 'app-upload',
-  templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.css']
+  selector: 'app-person',
+  templateUrl: './person.component.html',
+  styleUrls: ['./person.component.css']
 })
-export class UploadComponent implements OnInit {
+export class PersonComponent implements OnInit {
   person: Person;
-  uploadForm: FormGroup;
+  personForm: FormGroup;
   avatar: File;
   formResponse: any;
 
   constructor(
     private fb: FormBuilder,
     private commonFormGroups: CommonFormGroups,
-    private uploadService: UploadService,
+    private personService: PersonService,
     private toastr: ToastrService
   ) {}
 
@@ -29,24 +28,24 @@ export class UploadComponent implements OnInit {
   }
 
   initForm(model?: Person) {
-    this.uploadForm = this.commonFormGroups.initPerson(this.person);
+    this.personForm = this.commonFormGroups.initPerson(this.person);
   }
 
   uploadFiles(e: any) {
     if (e.target.files.length > 0) {
       const file = e.target.files[0];
-      this.uploadForm.get('avatar').setValue(file);
+      this.personForm.get('avatar').setValue(file);
     }
   }
 
   save() {
-    console.log('form: ', this.uploadForm.value);
+    console.log('form: ', this.personForm.value);
     const formData = new FormData();
-    formData.append('name', this.uploadForm.get('name').value);
-    formData.append('age', this.uploadForm.get('age').value);
-    formData.append('avatar', this.uploadForm.get('avatar').value);
+    formData.append('name', this.personForm.get('name').value);
+    formData.append('age', this.personForm.get('age').value);
+    formData.append('avatar', this.personForm.get('avatar').value);
 
-    this.uploadService.upload(formData).subscribe(
+    this.personService.upload(formData).subscribe(
       res => {
         if (res.success) {
           this.formResponse = res['formValues'];

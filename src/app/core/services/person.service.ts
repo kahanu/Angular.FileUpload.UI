@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpBase } from '../http-base';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ExceptionService } from './common/exception.service';
 import { environment } from '../../../environments/environment';
-import { RequestOptions } from '@angular/http';
 
 @Injectable()
-export class UploadService extends HttpBase<any> {
+export class PersonService extends HttpBase<any> {
   constructor(
     protected http: HttpClient,
     protected exceptionService: ExceptionService
   ) {
-    super(http, exceptionService, environment.Api.Upload);
+    super(http, exceptionService, environment.Api.Person);
   }
 
   /**

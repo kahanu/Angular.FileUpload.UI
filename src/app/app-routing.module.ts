@@ -9,7 +9,7 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       { path: '', component: HomeComponent },
-      { path: 'upload', loadChildren: 'app/upload/upload.module#UploadModule' },
+      { path: 'person', loadChildren: 'app/person/person.module#PersonModule' },
       { path: 'products', loadChildren: 'app/product/product.module#ProductModule' },
       { path: 'companies', loadChildren: 'app/company/company.module#CompanyModule' }
     ]

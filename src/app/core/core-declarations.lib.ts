@@ -1,6 +1,6 @@
 import { CommonFormGroups } from '../shared/formgroups/common';
 import {
-  UploadService,
+  PersonService,
   ExceptionService,
   ProductService,
   CompanyService
@@ -10,7 +10,7 @@ export const commonformgroups = [CommonFormGroups];
 
 export const services = [
   ExceptionService,
-  UploadService,
+  PersonService,
   ProductService,
   CompanyService
 ];
