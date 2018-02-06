@@ -20,8 +20,9 @@ export class PersonService extends HttpBase<any> {
    * interceptor.
    * @param data The form-data
    */
-  upload(data: any) {
-    const Url = this.url;
+  upload(data: any, path: string = '') {
+    // this.url is from the base class.
+    const Url = this.url.concat(path);
 
     /**
      * You can't JSON stringify the data for form-data requests.

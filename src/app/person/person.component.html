@@ -26,12 +26,13 @@
         </div>
         <div class="form-group">
           <div class="col-md-offset-3 col-md-9">
-            <button type="button" class="btn btn-primary" [disabled]="!personForm.valid" (click)="save()">Save</button>
+            <button type="button" class="btn btn-primary" [disabled]="!personForm.valid" (click)="saveAsFormData()">Save As Form Data</button>
+            <button type="button" class="btn btn-primary" [disabled]="!personForm.valid" (click)="saveAsModel()">Save As Model</button>
           </div>
         </div>
       </form>
       <div *ngIf="formResponse">
-        <strong>Response</strong>
+        <strong>Form Data Response</strong>
         <ul>
           <li>
             <b>Name: </b>
@@ -44,6 +45,23 @@
           <li>
             <b>File Name: </b>
             <span>{{ formResponse.avatar }}</span>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="personResponse">
+        <strong>Person Response</strong>
+        <ul>
+          <li>
+            <b>Name: </b>
+            <span>{{ personResponse.name }}</span>
+          </li>
+          <li>
+            <b>Age: </b>
+            <span>{{ personResponse.age }}</span>
+          </li>
+          <li>
+            <b>File Name: </b>
+            <span>{{ personResponse.avatar }}</span>
           </li>
         </ul>
       </div>

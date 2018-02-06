@@ -21,7 +21,7 @@ export class ProductComponent implements OnInit {
   }
 
   getProducts() {
-    this.productService.getAll('').subscribe(
+    this.productService.getAll('getproducts').subscribe(
       res => {
         if (res.success) {
           this.products = res['products'];

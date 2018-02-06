@@ -6,6 +6,7 @@ export class Company extends Entity {
   city: string;
   state: string;
   postalCode: string;
+  files: File[];
 }
 
 export class File {

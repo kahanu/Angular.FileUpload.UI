@@ -13,8 +13,10 @@ import { PersonService } from '../core/services/index';
 export class PersonComponent implements OnInit {
   person: Person;
   personForm: FormGroup;
+  personResponse: Person;
   avatar: File;
   formResponse: any;
+  urlPath: string;
 
   constructor(
     private fb: FormBuilder,
@@ -38,6 +40,16 @@ export class PersonComponent implements OnInit {
     }
   }
 
+  saveAsFormData() {
+    this.urlPath = 'postfile';
+    this.save();
+  }
+
+  saveAsModel() {
+    this.urlPath = 'saveperson';
+    this.save();
+  }
+
   save() {
     console.log('form: ', this.personForm.value);
     const formData = new FormData();
@@ -45,10 +57,11 @@ export class PersonComponent implements OnInit {
     formData.append('age', this.personForm.get('age').value);
     formData.append('avatar', this.personForm.get('avatar').value);
 
-    this.personService.upload(formData).subscribe(
+    this.personService.upload(formData, this.urlPath).subscribe(
       res => {
         if (res.success) {
           this.formResponse = res['formValues'];
+          this.personResponse = res['person'];
           this.toastr.success('Upload Success!', 'Upload');
         }
       },

@@ -1,0 +1,8 @@
+div.file-list div {
+  clear: both;
+}
+div.file-list label {
+  float: left;
+  width: 100px;
+  display: block;
+}

@@ -30,7 +30,8 @@ export class CommonFormGroups {
       companyName: [model ? model.companyName : 'Acme Widgets, LLC.', [Validators.required]],
       city: [model ? model.city : 'Burbank', [Validators.required]],
       state: [model ? model.state : 'CA', [Validators.required]],
-      postalCode: [model ? model.postalCode : '91604', [Validators.required]]
+      postalCode: [model ? model.postalCode : '91604', [Validators.required]],
+      files: [model ? model.files : []]
     });
   }
 

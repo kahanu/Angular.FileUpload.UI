@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { CommonFormGroups } from '../shared/formgroups/common';
 import { CompanyService } from '../core/services/company.service';
 import { ToastrService } from 'ngx-toastr';
+import { Helpers } from '../shared/helpers/helpers';
 
 @Component({
   selector: 'app-company',
@@ -14,6 +15,7 @@ export class CompanyComponent implements OnInit {
   company: Company;
   companyForm: FormGroup;
   formResponse: CompanyResponse;
+  fileList: File[] = [];
 
   constructor(
     private commonFormGroups: CommonFormGroups,
@@ -31,32 +33,40 @@ export class CompanyComponent implements OnInit {
 
   uploadFiles(e: any) {
     if (e.target.files.length > 0) {
-      const file = e.target.files[0];
-      // this.companyForm.get('avatar').setValue(file);
+      const files = e.target.files;
+      for (let i = 0; i < files.length; i++) {
+        this.fileList.push(files[i]);
+      }
     }
   }
 
   save() {
-    const form = this.companyForm.value;
+    const form = this.companyForm;
 
-    const payload = {
-      CompanyToSave: form
-    };
+    const formData = new FormData();
+    formData.append('id', this.companyForm.get('id').value);
+    formData.append('companyName', this.companyForm.get('companyName').value);
+    formData.append('city', this.companyForm.get('city').value);
+    formData.append('state', this.companyForm.get('state').value);
+    formData.append('postalCode', this.companyForm.get('postalCode').value);
+    this.fileList.forEach(item => {
+      formData.append('files', item);
+    });
 
-    console.log('payload: ', payload);
-
-    this.companyService.save(payload, '')
-      .subscribe(res => {
+    this.companyService.upload(formData, 'postcompany').subscribe(
+      res => {
         if (res.success) {
           this.formResponse = new CompanyResponse();
           this.formResponse.company = new Company();
           this.formResponse.company = res['company'];
           this.formResponse.files = res['fileList'];
+
           this.toastr.success('Company saved successfully!', 'Save Company');
         } else {
           this.toastr.error(res.errorMessage, 'Save Company Failure');
         }
-      }, error => this.toastr.error(error, 'Save Company Error'));
-
+      },
+      error => this.toastr.error(error, 'Save Company Error')
+    );
   }
 }

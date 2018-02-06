@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-6">
     <h3>Save Company</h3>
-    <p>Upload a file to a WebApi service and get back a response.</p>
+    <p>Upload one or more files to a WebApi service and get back a response.</p>
     <div>
       <form class="form-horizontal" [formGroup]="companyForm">
         <div class="form-group">
@@ -29,9 +29,9 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3">Avatar:</label>
+          <label class="control-label col-md-3">Files:</label>
           <div class="col-md-9">
-            <input type="file" class="form-control" (change)="uploadFiles($event)">
+            <input type="file" class="form-control" (change)="uploadFiles($event)" multiple>
           </div>
         </div>
         <div class="form-group">
@@ -43,8 +43,9 @@
       <div *ngIf="formResponse">
         <strong>Response</strong>
         <ul>
-          <li><b>Id: </b>
-          <span>{{ formResponse.company.id }}</span>
+          <li>
+            <b>Id: </b>
+            <span>{{ formResponse.company.id }}</span>
           </li>
           <li>
             <b>Company Name: </b>
@@ -53,12 +54,6 @@
           <li>
             <b>Location: </b>
             <span>{{ formResponse.company.city }} {{ formResponse.company.state }} {{ formResponse.company.postalCode }}</span>
-          </li>
-          <li>
-            <b>Files: </b>
-            <span *ngFor="let file of formResponse.files">
-              {{ file.fileName }} - {{ file.fileSize }} - {{ file.contentType}}
-            </span>
           </li>
         </ul>
       </div>
@@ -80,6 +75,22 @@
           it will be posting multipart/form-data. If it is, then it removes the "Content-Type" header from the request, which
           makes this work.</li>
       </ol>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12" [formGroup]="companyForm">
+    <div *ngIf="formResponse">
+      <b>Files: </b>
+      <div *ngFor="let file of formResponse.files" class="file-list well well-sm">
+        <div>
+          <label>File Name: </label>{{ file.fileName }}</div>
+        <div>
+          <label>Size: </label>{{ file.fileSize }}
+        </div>
+        <div>
+          <label>Content Type: </label>{{ file.contentType}}</div>
+      </div>
     </div>
   </div>
 </div>
